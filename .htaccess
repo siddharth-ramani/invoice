@@ -1,0 +1,33 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+    RewriteRule ^(?:storage/(?:app|framework|logs)|bootstrap/cache)(?:/|$) - [F,L]
+    RewriteRule ^(?:app|bootstrap|config|database|resources|routes|tests|vendor)(?:/|$) - [F,L]
+
+    RewriteRule ^favicon\.ico$ public/assets/brand/favicon.ico [L]
+
+    # Serve local public assets for the existing /invoice root entry point.
+    RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+    <Files ~ "\.(env|env.example|json|config.js|md|gitignore|gitattributes|lock)$|artisan">
+            Order allow,deny
+            Deny from all
+    </Files>
+</IfModule>

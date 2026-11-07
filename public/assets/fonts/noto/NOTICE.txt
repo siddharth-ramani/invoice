@@ -1,0 +1,7 @@
+Noto Sans Gujarati and Noto Sans Devanagari regular/bold static TTFs.
+Source: https://github.com/notofonts/noto-fonts/tree/main/hinted/ttf
+License: SIL Open Font License 1.1; see adjacent OFL files.
+Browser fonts are served locally. Indic PDF rendering uses mPDF bundled GNU FreeFont
+FreeSerif (license/provenance in vendor/mpdf/mpdf/ttfonts) with OpenType shaping.
+Gujarati bold aliases regular FreeSerif because its bold variant lacks Gujarati glyphs.
+English documents retain the original Dompdf renderer.
